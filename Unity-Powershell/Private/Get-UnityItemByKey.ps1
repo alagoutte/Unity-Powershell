@@ -56,18 +56,19 @@ Function Get-UnityItemByKey {
 
             If ($ResultsFiltered) {
             
-                $ResultCollection = ConvertTo-Hashtable -Data $ResultsFiltered
+                #$ResultCollection = ConvertTo-Hashtable -Data $ResultsFiltered
 
-                Foreach ($Result in $ResultCollection) {
+                Foreach ($Result in $ResultsFiltered) {
 
                     # Instantiate and output object
-                    New-Object -TypeName $TypeName -Property $Result
+
+                    Write-Debug -Message "[$($MyInvocation.MyCommand)] Building result object type $($TypeName) "
+
+                    New-UnityObject -TypeName $TypeName -Property $Result
 
                 } # End Foreach ($Result in $ResultCollection)
             } # End If ($ResultsFiltered) 
         } # End If ($Results)
     } # End If ($Sess.TestConnection())
-
-  }
-    
-}
+  } # End Process
+} # End Function Get-UnityItemByKey
